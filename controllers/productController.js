@@ -173,7 +173,7 @@ exports.listProducts = async (req, res) => {
             },
             take: parseInt(limit),
             orderBy: { last_update: 'desc' },
-            include: { Image: true, },
+            include: { Image: true, Category: true },
         });
 
         res.send({ message: 'Read products success', result });
@@ -193,7 +193,7 @@ exports.listInactiveProducts = async (req, res) => {
             },
             take: parseInt(limit),
             orderBy: { last_update: 'desc' },
-            include: { Image: true, },
+            include: { Image: true, Category: true },
         });
 
         res.send({ message: 'Read inactive products success', result });
@@ -211,7 +211,7 @@ exports.getEachProduct = async (req, res) => {
                 id,
                 status: 'active',
             },
-            include: { Image: true, },
+            include: { Image: true, Category: true },
         });
 
         res.send({ message: 'Get product success', result });
@@ -256,6 +256,7 @@ exports.searchProduct = async (req, res) => {
             },
             include: {
                 Image: true,
+                Category: true
             },
         });
 
@@ -278,7 +279,7 @@ exports.listProductBy = async (req, res) => {
                 [sort]: 'desc',
             },
             take: parseInt(limit),
-            include: { Image: true, },
+            include: { Image: true, Category: true },
         });
 
         res.send({ message: 'success', result });
@@ -294,7 +295,8 @@ exports.callProductsByList = async (req, res) => {
         const result = await prisma.product.findMany({
             where: {
                 id: { in: arrListId },
-            }
+            },
+            include: { Image: true, Category: true },
         });
 
         res.send({ message: 'Call Products by list done', result })
