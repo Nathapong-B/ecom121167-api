@@ -19,7 +19,3 @@ exports.profileSchema = z.object({
     phone: z.string({ message: 'Input phone number' }).length(10, { message: 'Invalid phone number' }).nonempty({ message: 'Field is require' }).regex(phoneValidate, 'Invalid phone, Ex. 0123456789'),
     address: z.string().nonempty({ message: 'Field is require' }),
 });
-
-exports.datetimeSchema = z.object({
-    date: z.string().nonempty({ message: 'Data is require' }).regex(dateValidate, 'Invalid input'),
-});
