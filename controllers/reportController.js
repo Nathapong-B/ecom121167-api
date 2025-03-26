@@ -24,4 +24,20 @@ exports.reportPerDay = async (req, res) => {
         console.log(err);
         res.status(500).send({ message: 'Internal Server Error' });
     }
-}
+};
+
+exports.getCount = async (req, res) => {
+    try {
+        const { table } = req.params;
+        const models = ['user', 'product', 'category'];
+
+        if(!models.includes(table.toLowerCase())) return res.status(400).send({message:'Model not found'});
+
+        const tableCount = await prisma?.[table].count();
+
+        res.send({ message: 'ok', tableCount });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ message: 'Internal Server Error' });
+    }
+};
