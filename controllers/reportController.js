@@ -16,7 +16,10 @@ exports.reportPerDay = async (req, res) => {
                 NOT: {
                     status: "canceled"
                 }
-            }
+            },
+            include: {
+                OrderDetail: true,
+            },
         });
 
         res.send({ message: 'ok', result });
