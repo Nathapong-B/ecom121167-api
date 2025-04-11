@@ -68,12 +68,10 @@ exports.createOrder = async ({ userId, customerDetail, sumOrder, paymentIntent, 
 exports.updateStatus = async ({ id, status }) => {
     try {
         return await prisma.order.update({
-            where: { 
+            where: {
                 id,
-                NOT:{
-                    status:'canceled'
-                }
-             },
+                status: 'pending'
+            },
             data: {
                 status,
             },
