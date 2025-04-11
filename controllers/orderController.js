@@ -53,7 +53,7 @@ exports.createOrder = async (req, res) => {
 
 exports.removeOrder = async (req, res) => {
     try {
-        // product's id
+        // order's id
         const { id } = req.params;
 
         // #1 - เปลี่ยน status tb order เป็น canceled
