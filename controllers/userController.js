@@ -207,75 +207,13 @@ exports.listUsers = async (req, res) => {
                 last_update: true,
                 create_date: true,
             },
+            orderBy: {
+                last_update: 'desc',
+            },
         });
 
         res.send({ message: 'List users done', result });
     } catch (err) {
         res.status(500).send({ message: 'Internal Server Error' });
     };
-};
-
-
-// exports.callProfile = async (req, res) => {
-//     try {
-//         const { sub } = req.decoded;
-
-//         const result = await prisma.user.findUnique({
-//             where: { id: sub },
-//             select: {
-//                 id: true,
-//                 email: true,
-//                 role: true,
-//                 status: true,
-//                 first_name: true,
-//                 last_name: true,
-//                 address: true,
-//                 phone: true,
-//                 last_update: true,
-//                 create_date: true,
-//                 ProfileImage: true,
-//             }
-//         });
-
-//         res.send({ message: 'Call profile done', result });
-//     } catch (err) {
-//         console.log(err)
-//         res.status(500).send({ message: 'Internal Server Error' });
-//     };
-// };
-
-
-
-
-// test
-exports.testApi = async (req, res) => {
-    // const file = req.files[0] ? [req.files[0]] : [];
-
-    const { first_name, last_name, address, phone } = req.body.data ? JSON.parse(req.body.data) : req.body;
-
-
-
-    // const data={ first_name, last_name, address, phone }
-    const data = first_name
-    // console.log('firstName : ', data)
-
-
-    const id = "73ec5bbf-2b27-413e-ba91-68222e9ffdff"; // admin
-    // const id = "09cc75cd-89fe-4d25-b872-17e497ed940b"; // user
-    const detail = "test img"
-    const detail2 = "test img 2"
-
-    // no data return null
-    const img_public_id = await prisma.profileImage.findFirst({
-        where: {
-            User: {
-                every: { id: id }
-            }
-        },
-        select: { public_id: true }
-    });
-
-    console.log(findImgUser)
-
-    res.send({ message: 'test api ok', })
 };
