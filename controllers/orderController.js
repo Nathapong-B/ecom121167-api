@@ -169,6 +169,7 @@ exports.listOrders = async (req, res) => {
                         Product: {
                             include: {
                                 Image: true,
+                                Category: true,
                             },
                         },
                     },
